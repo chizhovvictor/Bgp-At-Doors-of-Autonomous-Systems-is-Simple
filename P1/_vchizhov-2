@@ -1,7 +1,9 @@
-FROM debian:latest
+FROM frrouting/frr:v8.4.0
 
-RUN apt install quagga
+RUN apk add --no-cache busybox
 
+#ENTRYPOINT [ "script", "-qfc", "while true; do TERM=vt100 /gns3/bin/busybox sh; sleep 1; done" ]
 
-
-
+RUN sed -i "s/^bgpd=no/bgpd=yes/" /etc/frr/daemons \
+  && sed -i "s/^ospfd=no/ospfd=yes/" /etc/frr/daemons \
+  && sed -i "s/^isisd=no/isisd=yes/" /etc/frr/daemons
