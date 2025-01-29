@@ -3,7 +3,7 @@ ip link add br0 type bridge
 ip link set br0 up
 
 # Создать VXLAN-интерфейс
-ip link add vxlan10 type vxlan id 10 dev eth0 group 239.1.1.1 dstport 4789
+ip link add vxlan10 type vxlan id 10 dev eth0 remote 10.1.1.2 dstport 4789
 ip link set vxlan10 up
 
 # Присоединить VXLAN и eth1 к bridge
