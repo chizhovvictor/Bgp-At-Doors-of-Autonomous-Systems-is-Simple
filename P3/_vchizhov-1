@@ -1,27 +1,50 @@
+# Open configure mode
 vtysh
 conf t
+
+# Configure eth0
 interface eth0
 ip address 10.1.1.1/30
 
+# Configure eth1
 interface eth1
 ip address 10.1.1.5/30
 
+# Configure eth2
 interface eth2
 ip address 10.1.1.9/30
 
+# Configure lo
 interface lo
 ip address 1.1.1.1/32
 
+# Start bgp network with AS 1
 router bgp 1
+
+# Create group for neighbor
 neighbor ibgp peer-group
+
+# Define neighbors from ibgp group with AS 1  
 neighbor ibgp remote-as 1
+
+# Define soures of ibgp as lo RR 
 neighbor ibgp update-source lo
+
+# Add all neighbors from 1.1.1.0/29 (1.1.1.1 - 1.1.1.6)
 bgp listen range 1.1.1.0/29 peer-group ibgp
- 
+
+# Activate evpn (evpn allows to use l2 newtworks with bgp) 
 address-family l2vpn evpn
+
+# Activate evpn for neighbors
 neighbor ibgp activate
+
+# Activate RR mode on this interface for ibgp group
 neighbor ibgp route-reflector-client
+
+# Finish configurate 
 exit-address-family
 
+# Turn on OSPF process and define all interfaces of router in area 0
 router ospf
 network 0.0.0.0/0 area 0
