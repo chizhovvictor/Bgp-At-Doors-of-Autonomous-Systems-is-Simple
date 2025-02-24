@@ -16,19 +16,14 @@ vtysh
 # Перейти в режим настройки конфигурации нашего leaf
 conf t
 
-# Настроить eth0
-vinterface eth0
+interface eth0
 ip address 10.1.1.2/30
 ip ospf area 0
-ip ospf cost 20000
 
-# Настроить lo
 interface lo
 ip address 1.1.1.2/32
 ip ospf area 0
-ip ospf cost 10000
 
-# Настроить соседство
 router bgp 1
 neighbor 1.1.1.1 remote-as 1
 neighbor 1.1.1.1 update-source lo
@@ -39,3 +34,4 @@ advertise-all-vni
 exit-address-family
 
 router ospf
+
