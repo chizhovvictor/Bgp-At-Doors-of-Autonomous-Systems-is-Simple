@@ -48,3 +48,6 @@ exit-address-family
 # Turn on OSPF process and define all interfaces of router in area 0
 router ospf
 network 0.0.0.0/0 area 0
+
+# 
+line vty
