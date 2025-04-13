@@ -1,6 +1,7 @@
 # BUILD
 
 docker build -f _vchizhov-1 -t host_vchizhov .
+
 docker build -f _vchizhov-2 -t router_vchizhov .
 
 # README for GNS3 and Docker Setup with Routing Configuration
